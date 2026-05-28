@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — หน้านี้หายไป | Doi &amp; Co.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans+Thai:wght@300;400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --color-forest:     #2D4A2B;
+      --color-sage:       #8AA68B;
+      --color-rose:       #D4A5A0;
+      --color-cream:      #F5F1E8;
+      --color-warm-white: #FAF7F0;
+      --color-charcoal:   #3A3530;
+      --color-walnut:     #7A5C42;
+      --color-copper:     #B87333;
+      --color-iron:       #2A2A28;
+      --font-display: 'Playfair Display', serif;
+      --font-thai:    'IBM Plex Sans Thai', sans-serif;
+      --font-body:    'Inter', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+
+    body {
+      font-family: var(--font-thai);
+      background: var(--color-forest);
+      color: var(--color-cream);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Floating beans ── */
+    .bg-beans {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .bg-bean {
+      position: absolute;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      background: rgba(184,115,51,0.18);
+      animation: beanDrift linear infinite;
+    }
+    .bg-bean:nth-child(1)  { width:12px; height:19px; left:8%;   top:80%; animation-duration:16s; animation-delay:0s;   }
+    .bg-bean:nth-child(2)  { width:8px;  height:13px; left:20%;  top:70%; animation-duration:22s; animation-delay:3s;   }
+    .bg-bean:nth-child(3)  { width:14px; height:22px; left:70%;  top:85%; animation-duration:14s; animation-delay:1s;   }
+    .bg-bean:nth-child(4)  { width:9px;  height:14px; left:85%;  top:60%; animation-duration:18s; animation-delay:4s;   }
+    .bg-bean:nth-child(5)  { width:7px;  height:11px; left:55%;  top:75%; animation-duration:20s; animation-delay:2s;   }
+    .bg-bean:nth-child(6)  { width:11px; height:17px; left:40%;  top:90%; animation-duration:17s; animation-delay:5s;   }
+    .bg-bean:nth-child(7)  { width:6px;  height:10px; left:92%;  top:40%; animation-duration:24s; animation-delay:1.5s; }
+    .bg-bean:nth-child(8)  { width:10px; height:16px; left:5%;   top:30%; animation-duration:19s; animation-delay:6s;   }
+    @keyframes beanDrift {
+      0%   { transform: translateY(0) rotate(0deg);   opacity: 0;   }
+      10%  { opacity: 0.8; }
+      90%  { opacity: 0.4; }
+      100% { transform: translateY(-160px) rotate(200deg); opacity: 0; }
+    }
+
+    /* ── Checker strip (English kitchen floor) ── */
+    .checker-top, .checker-bottom {
+      height: 36px;
+      flex-shrink: 0;
+      background-image: repeating-conic-gradient(rgba(250,247,240,0.18) 0% 25%, rgba(45,74,43,0.9) 0% 50%);
+      background-size: 18px 18px;
+      position: relative;
+      z-index: 1;
+    }
+    .checker-top  { border-bottom: 1px solid rgba(184,115,51,0.3); }
+    .checker-bottom { border-top:    1px solid rgba(184,115,51,0.3); }
+
+    /* ── Main content area ── */
+    .main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .inner {
+      text-align: center;
+      max-width: 560px;
+    }
+
+    /* ── Vintage frame corners ── */
+    .frame-wrap {
+      position: relative;
+      display: inline-block;
+      padding: 32px 40px 28px;
+      margin-bottom: 32px;
+    }
+    .frame-corner {
+      position: absolute;
+      color: var(--color-copper);
+      opacity: 0.65;
+    }
+    .frame-corner.tl { top: 0;    left: 0; }
+    .frame-corner.tr { top: 0;    right: 0; transform: scaleX(-1); }
+    .frame-corner.bl { bottom: 0; left: 0;  transform: scaleY(-1); }
+    .frame-corner.br { bottom: 0; right: 0; transform: scale(-1,-1); }
+
+    /* ── 404 number ── */
+    .error-label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--color-copper);
+      margin-bottom: 8px;
+    }
+    .error-number {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(88px, 18vw, 148px);
+      font-weight: 700;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 2px var(--color-copper);
+      letter-spacing: -0.02em;
+      position: relative;
+    }
+    .error-number::after {
+      content: '404';
+      position: absolute;
+      inset: 3px 0 0 3px;
+      color: rgba(184,115,51,0.15);
+      -webkit-text-stroke: 0;
+    }
+
+    /* ── Cup decoration ── */
+    .cup-404 {
+      display: flex;
+      justify-content: center;
+      margin: 24px auto 28px;
+    }
+    .cup-404-wrap {
+      position: relative;
+      width: 72px;
+      height: 66px;
+      transform: rotate(-22deg);
+      filter: drop-shadow(4px 6px 12px rgba(0,0,0,0.3));
+    }
+    .c4-rim    { width: 60px; height: 9px;  background: rgba(212,165,160,0.6); border-radius: 5px 5px 0 0; position: absolute; top: 12px; left: 3px; }
+    .c4-body   { width: 54px; height: 40px; background: rgba(212,165,160,0.25); border: 1.5px solid rgba(212,165,160,0.4); border-radius: 0 0 18px 18px; position: absolute; top: 21px; left: 6px; }
+    .c4-handle { width: 16px; height: 22px; border: 3.5px solid rgba(212,165,160,0.45); border-radius: 0 10px 10px 0; border-left: none; position: absolute; top: 26px; right: 0; }
+    .c4-saucer { width: 66px; height: 9px;  background: rgba(212,165,160,0.4); border-radius: 50%; position: absolute; bottom: 0; left: 0; }
+    /* Spilled drops */
+    .spill {
+      position: absolute;
+      bottom: -8px;
+      border-radius: 50%;
+      background: rgba(184,115,51,0.35);
+    }
+    .spill-1 { width: 22px; height: 7px; left: 10px; }
+    .spill-2 { width: 12px; height: 5px; left: 36px; bottom: -14px; }
+    .spill-3 { width: 7px;  height: 7px; left: 2px;  bottom: -12px; border-radius: 50%; }
+
+    /* ── Divider with bean ── */
+    .error-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 auto 24px;
+      max-width: 320px;
+      color: var(--color-copper);
+    }
+    .error-divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--color-copper), transparent);
+    }
+
+    /* ── Copy ── */
+    .error-title {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 4vw, 26px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--color-cream);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+    .error-sub {
+      font-family: var(--font-thai);
+      font-size: 15px;
+      color: rgba(245,241,232,0.6);
+      line-height: 1.8;
+      margin-bottom: 36px;
+    }
+
+    /* ── CTA ── */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--color-rose);
+      color: var(--color-forest);
+      font-family: var(--font-thai);
+      font-weight: 500;
+      font-size: 16px;
+      padding: 14px 32px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background-color 0.25s, transform 0.25s;
+      min-height: 52px;
+    }
+    .back-btn:hover {
+      background: #c99490;
+      transform: translateY(-2px);
+    }
+
+    .error-footer-note {
+      margin-top: 28px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: rgba(138,166,139,0.5);
+      letter-spacing: 0.1em;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-beans" aria-hidden="true">
+    <div class="bg-bean"></div>
+    <div class="bg-bean"></div>
+    <div class="bg-bean"></div>
+    <div class="bg-bean"></div>
+    <div class="bg-bean"></div>
+    <div class="bg-bean"></div>
+    <div class="bg-bean"></div>
+    <div class="bg-bean"></div>
+  </div>
+
+  <!-- English kitchen checkerboard top strip -->
+  <div class="checker-top" aria-hidden="true"></div>
+
+  <main class="main">
+    <div class="inner">
+
+      <!-- Vintage corner frame around the 404 number -->
+      <div class="frame-wrap">
+        <!-- Corner ornament SVG — vintage English scrollwork -->
+        <svg class="frame-corner tl" width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <path d="M0 48 L0 8 Q0 0 8 0 L48 0" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <path d="M4 48 L4 12 Q4 4 12 4 L48 4" stroke="currentColor" stroke-width="0.75" fill="none" opacity="0.5"/>
+          <circle cx="8" cy="8" r="4.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <circle cx="8" cy="8" r="1.8" fill="currentColor" opacity="0.6"/>
+          <path d="M8 3.5 Q14 8 8 13.5" stroke="currentColor" stroke-width="0.75" fill="none" opacity="0.7"/>
+          <path d="M3.5 8 Q8 14 13.5 8" stroke="currentColor" stroke-width="0.75" fill="none" opacity="0.7"/>
+          <path d="M24 0 L27 3 L24 6 L21 3 Z" stroke="currentColor" stroke-width="0.75" fill="none" opacity="0.45"/>
+        </svg>
+        <svg class="frame-corner tr" width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <path d="M0 48 L0 8 Q0 0 8 0 L48 0" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <path d="M4 48 L4 12 Q4 4 12 4 L48 4" stroke="currentColor" stroke-width="0.75" fill="none" opacity="0.5"/>
+          <circle cx="8" cy="8" r="4.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <circle cx="8" cy="8" r="1.8" fill="currentColor" opacity="0.6"/>
+          <path d="M8 3.5 Q14 8 8 13.5" stroke="currentColor" stroke-width="0.75" fill="none" opacity="0.7"/>
+          <path d="M3.5 8 Q8 14 13.5 8" stroke="currentColor" stroke-width="0.75" fill="none" opacity="0.7"/>
+          <path d="M24 0 L27 3 L24 6 L21 3 Z" stroke="currentColor" stroke-width="0.75" fill="none" opacity="0.45"/>
+        </svg>
+        <svg class="frame-corner bl" width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <path d="M0 48 L0 8 Q0 0 8 0 L48 0" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <path d="M4 48 L4 12 Q4 4 12 4 L48 4" stroke="currentColor" stroke-width="0.75" fill="none" opacity="0.5"/>
+          <circle cx="8" cy="8" r="4.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <circle cx="8" cy="8" r="1.8" fill="currentColor" opacity="0.6"/>
+          <path d="M8 3.5 Q14 8 8 13.5" stroke="currentColor" stroke-width="0.75" fill="none" opacity="0.7"/>
+          <path d="M3.5 8 Q8 14 13.5 8" stroke="currentColor" stroke-width="0.75" fill="none" opacity="0.7"/>
+          <path d="M24 0 L27 3 L24 6 L21 3 Z" stroke="currentColor" stroke-width="0.75" fill="none" opacity="0.45"/>
+        </svg>
+        <svg class="frame-corner br" width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <path d="M0 48 L0 8 Q0 0 8 0 L48 0" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <path d="M4 48 L4 12 Q4 4 12 4 L48 4" stroke="currentColor" stroke-width="0.75" fill="none" opacity="0.5"/>
+          <circle cx="8" cy="8" r="4.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <circle cx="8" cy="8" r="1.8" fill="currentColor" opacity="0.6"/>
+          <path d="M8 3.5 Q14 8 8 13.5" stroke="currentColor" stroke-width="0.75" fill="none" opacity="0.7"/>
+          <path d="M3.5 8 Q8 14 13.5 8" stroke="currentColor" stroke-width="0.75" fill="none" opacity="0.7"/>
+          <path d="M24 0 L27 3 L24 6 L21 3 Z" stroke="currentColor" stroke-width="0.75" fill="none" opacity="0.45"/>
+        </svg>
+
+        <p class="error-label">Page Not Found</p>
+        <h1 class="error-number">404</h1>
+      </div>
+
+      <!-- Toppled empty coffee cup -->
+      <div class="cup-404" aria-hidden="true">
+        <div class="cup-404-wrap">
+          <div class="c4-rim"></div>
+          <div class="c4-body"></div>
+          <div class="c4-handle"></div>
+          <div class="c4-saucer"></div>
+          <div class="spill spill-1"></div>
+          <div class="spill spill-2"></div>
+          <div class="spill spill-3"></div>
+        </div>
+      </div>
+
+      <!-- Copper ornament divider -->
+      <div class="error-divider" aria-hidden="true">
+        <div class="error-divider-line"></div>
+        <svg width="16" height="24" viewBox="0 0 16 24" fill="none">
+          <ellipse cx="8" cy="12" rx="6" ry="11" fill="currentColor" opacity="0.3"/>
+          <ellipse cx="8" cy="12" rx="6" ry="11" stroke="currentColor" stroke-width="1.5" opacity="0.8"/>
+          <line x1="8" y1="1.5" x2="8" y2="22.5" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+        </svg>
+        <div class="error-divider-line"></div>
+      </div>
+
+      <h2 class="error-title">หน้านี้หายไปเหมือนกาแฟแก้วสุดท้าย</h2>
+      <p class="error-sub">
+        ดูเหมือนว่าหน้าที่คุณกำลังหาไม่มีอยู่ในเมนูของเรา<br/>
+        แต่กาแฟดีๆ ยังรอคุณอยู่ที่หน้าหลัก
+      </p>
+
+      <a href="index.html" class="back-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        กลับหน้าหลัก
+      </a>
+
+      <p class="error-footer-note">Doi &amp; Co. · Premium Thai Coffee</p>
+
+    </div>
+  </main>
+
+  <!-- English kitchen checkerboard bottom strip -->
+  <div class="checker-bottom" aria-hidden="true"></div>
+
+</body>
+</html>
