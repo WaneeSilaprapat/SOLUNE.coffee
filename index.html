@@ -2834,6 +2834,13 @@
       });
     }
 
+    // ── Service Worker (offline support) ─────────────────────────
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+      });
+    }
+
     // ── Number count-up animation ──────────────────────────────
     const countEls = document.querySelectorAll('[data-count]');
     if (countEls.length && !prefersReduced) {
