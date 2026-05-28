@@ -215,9 +215,6 @@
       object-fit: cover;
       object-position: center;
     }
-    @media (max-width: 767px) {
-      .hero-video { display: none; }
-    }
     @media (prefers-reduced-motion: reduce) {
       .hero-video { display: none; }
     }
@@ -1778,7 +1775,7 @@
         muted
         loop
         playsinline
-        preload="none"
+        preload="auto"
         poster="assets/hero-pour.jpeg"
         aria-hidden="true"
       ></video>
@@ -2810,7 +2807,12 @@
     window.addEventListener('load', () => {
       hero.classList.add('loaded');
       const video = document.querySelector('.hero-video');
-      if (video) video.play().catch(() => {});
+      if (video) {
+        video.muted = true;
+        video.play().catch(() => {
+          document.addEventListener('touchstart', () => video.play().catch(() => {}), { once: true });
+        });
+      }
     });
 
     // ── Smooth scroll for all anchor links ───────────────────────
