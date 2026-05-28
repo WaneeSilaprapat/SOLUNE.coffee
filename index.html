@@ -215,6 +215,9 @@
       object-fit: cover;
       object-position: center;
     }
+    @media (max-width: 767px) {
+      .hero-video { display: none; }
+    }
     @media (prefers-reduced-motion: reduce) {
       .hero-video { display: none; }
     }
@@ -2806,6 +2809,8 @@
     const hero = document.getElementById('hero');
     window.addEventListener('load', () => {
       hero.classList.add('loaded');
+      const video = document.querySelector('.hero-video');
+      if (video) video.play().catch(() => {});
     });
 
     // ── Smooth scroll for all anchor links ───────────────────────
